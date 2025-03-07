@@ -6,7 +6,7 @@ public class CajeroGrose {
         Scanner scanner = new Scanner(System.in);
 
         final int PIN_CORRECTO = 1234;
-        double saldo = 100.000;
+        double saldo = 100000;
         int intentos = 0;
         boolean cuentaBloqueada = false;
 
@@ -38,7 +38,9 @@ public class CajeroGrose {
             System.out.println("1. Consultar Chichigua");
             System.out.println("2. Retirar los pesos");
             System.out.println("3. Depositar");
-            System.out.println("4. Open the parch");
+            System.out.println("4. Transferir");
+            System.out.println("5. Cambio de clave");
+            System.out.println("6. Open the parch");
             opcion = scanner.nextInt();
 
             ///opciones
@@ -64,12 +66,41 @@ public class CajeroGrose {
                         System.out.println("Deposito exitoso!!! Nuevo saldo: "+saldo);
                     } 
                     break;
-                case 4:     
+                case 4:       // new
+                    System.out.println("Numero de cuenta pues: ");
+                    int cuenta = scanner.nextInt();  
+                    System.out.println("Cuanto va a mandar: ");
+                    double transfer = scanner.nextDouble(); 
+                    if(transfer > 0 && transfer <= saldo){
+                        saldo-= transfer;
+                        System.out.println("Que chimb**, lo que queda es: "+saldo);
+                    }else{
+                        System.out.println("Despertate pues!! apenas tenes: "+saldo);
+                    }    
+                    break;
+                case 5:
+                    System.out.println("Ingrese su clave pues: ");
+                    int pinOld = scanner.nextInt();
+
+                    if(pinOld == PIN_CORRECTO){
+                        System.out.println("Cambie la clave pues: ");
+                        int pinNew = scanner.nextInt();
+                        System.out.println("Otra vez, pa que no se el olvide: ");
+                        int pinEnd = scanner.nextInt();
+                        if(pinEnd == pinNew){
+                        System.out.println("!!Listo el pollo¡¡");
+                        }
+                        break;
+                    }else{
+                    System.out.println("!!PIN incorrecto¡¡" +intentos);
+                    }
+                    return;
+                case 6:     
                     System.out.println("Nos pillamos!!");
                 default:
                     System.out.println("Avispate pues!! eso no es una opcion!!");
             }
-        } while (opcion!= 4);
+        } while (opcion!= 6);
         scanner.close();
        }
 }
